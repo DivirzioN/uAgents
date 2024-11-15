@@ -4,12 +4,12 @@ import copy
 import functools
 import hashlib
 import json
-from typing import Dict, List, Optional, Set, Tuple, Union, Type, Any
+from typing import Any, Dict, List, Optional, Set, Tuple, Type, Union
 
 from apispec import APISpec
 
-from uagents.context import IntervalCallback, MessageCallback
 from uagents.models import Model
+from uagents.types import IntervalCallback, MessageCallback
 
 OPENAPI_VERSION = "3.0.2"
 
@@ -335,7 +335,6 @@ class Protocol:
                 }
             )
 
-        # print(schema_digest)
         encoded = json.dumps(manifest, indent=None, sort_keys=True).encode("utf8")
         metadata["digest"] = f"proto:{hashlib.sha256(encoded).digest().hex()}"
 

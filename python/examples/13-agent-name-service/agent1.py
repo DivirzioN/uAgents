@@ -1,8 +1,7 @@
 from cosmpy.aerial.wallet import LocalWallet
 
-from uagents.network import get_name_service_contract, get_faucet
 from uagents import Agent, Context, Model
-
+from uagents.network import get_faucet, get_name_service_contract, logger
 
 # NOTE: Run agent1.py before running agent2.py
 
@@ -22,15 +21,17 @@ bob = Agent(
 my_wallet = LocalWallet.from_unsafe_seed("registration test wallet")
 name_service_contract = get_name_service_contract(test=True)
 faucet = get_faucet()
-DOMAIN = "agent"
+DOMAIN = "example.agent"
 
+logger.info(f"Adding testnet funds to {my_wallet.address()}...")
 faucet.get_wealth(my_wallet.address())
+logger.info(f"Adding testnet funds to {my_wallet.address()}...complete")
 
 
-@bob.on_event("startup")
+@bob.on_interval(10)
 async def register_agent_name(ctx: Context):
     await name_service_contract.register(
-        bob.ledger, my_wallet, ctx.address, ctx.name, DOMAIN
+        bob.ledger, my_wallet, bob.address, bob.name, DOMAIN
     )
 
 

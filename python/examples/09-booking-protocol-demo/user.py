@@ -6,7 +6,6 @@ from protocols.query import (
 
 from uagents import Agent, Context
 
-
 RESTAURANT_ADDRESS = (
     "test-agent://agent1qfpqn9jhvp9cg33f27q6jvmuv52dgyg9rfuu37rmxrletlqe7lewwjed5gy"
 )

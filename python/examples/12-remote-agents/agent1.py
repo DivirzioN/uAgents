@@ -7,6 +7,7 @@ Preparation:
  - during the first run, the script will download the ngrok application
    (no installation or registration required)
 """
+
 from pyngrok import conf, ngrok
 
 from uagents import Agent, Context, Model
